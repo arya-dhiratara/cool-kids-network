@@ -1,0 +1,9 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore PHPCS cache
+.phpcs.cache
+
+# Ignore Composer dependencies (can be installed via `composer install`)
+vendor/

@@ -1,0 +1,31 @@
+{
+    "name": "arya-dhiratara/cool-kids-network",
+    "description": "WordPress Developer Technical Assessment",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "CoolKidsNetwork\\": "src/"
+        },
+		"classmap": ["src/"]
+    },
+    "scripts": {
+	  "phpcs": "phpcs --standard=./phpcs.xml src/"
+	},
+    "authors": [
+        {
+            "name": "Arya Dhiratara",
+            "email": "arya@dhiratara.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.9",
+        "wp-coding-standards/wpcs": "^3.0"
+    }
+}
