@@ -25,7 +25,6 @@ $image_url        = $user_data['image_url'];
 $ckn_current_user = $user_data['user'];
 
 $can_view_users = in_array( $ckn_role, array( 'cooler_kid', 'coolest_kid' ), true );
-$can_view_email = ( 'coolest_kid' === $ckn_role );
 
 // Fetch users (excluding current user).
 $args  = array(
@@ -35,7 +34,11 @@ $args  = array(
 	'role__in' => array( 'cool_kid', 'cooler_kid', 'coolest_kid' ),
 	'exclude'  => array( $ckn_current_user->ID ),
 );
+
 $users = get_users( $args );
+
+$current_user = wp_get_current_user();
+$user_role    = $current_user->roles[0] ?? '';
 
 // Check if there are more than 12 users.
 $has_more_users = count( $users ) > 12;
@@ -68,3 +71,19 @@ $users          = array_slice( $users, 0, 12 );
 		<li><strong>Role:</strong> <?php echo esc_html( ucwords( str_replace( '_', ' ', $ckn_role ) ) ); ?></li>
 	</ul>
 </div>
+
+<!-- Other User Profile List -->
+<?php if ( $can_view_users ) : ?>
+	<div id="coolkids-user-list" class="coolkids-user-list m-0-auto is-grid has-global-gap has-large-margin-top">
+		<h2 class="text-is-bold grid-span-full">Meet other Cool Kids!</h2>
+		<?php foreach ( $users as $user_obj ) : ?>
+			<?php echo wp_kses_post( Utils::generate_user_card_html( $user_obj, esc_attr( $user_role ) ) ); ?>
+		<?php endforeach; ?>
+	</div>
+
+	<?php if ( $has_more_users ) : ?>
+		<div class="coolkids-load-more m-0-auto is-grid has-very-small-global-gap is-justify-center has-margin-top">
+			<button id="load-more-users" data-offset="12" class="ckn-button ckn-button-padding has-rounded-radius with-bg-img-on-hover">Load More</button>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>

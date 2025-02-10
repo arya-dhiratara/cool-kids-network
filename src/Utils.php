@@ -258,7 +258,7 @@ class Utils {
 	            </p>
 	        </figure>
 	        <div class="user-info is-grid is-justify-center">
-	            <p class="name text-is-bold">' . $user_name . '</p>
+	            <p class="name text-is-bold">' . esc_html( $user_name ) . '</p>
 	            <p class="country">' . esc_html( $user_country ) . '</p>
 	            ' . $email_block . '
 	        </div>
