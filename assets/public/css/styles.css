@@ -1,0 +1,298 @@
+/*!
+  * Plugin:	Cool Kids Network
+  * URL:	
+  * Name:	styles.css
+  */
+ 
+:root{
+	--baseFontSize: clamp(17.5px,calc(17.5px + (20 - 17.5) * ((100vw - 360px) / (1920 - 360))),20px);
+	--smallFontSize: clamp(15px,calc(15px + (17 - 15) * ((100vw - 360px) / (1920 - 360))),17px);
+	--largeFontSize: clamp(19.5px,calc(19.5px + (31 - 19.5) * ((100vw - 360px) / (1920 - 360))),31px);
+	--squareSlightRoundedRadius: calc(6px + (7.5 - 6) * ((100vw - 360px) / (1920 - 360)));
+	--squareRoundedRadius: clamp(18.5px,calc(18.5px + (25 - 18.5) * ((100vw - 360px) / (1920 - 360))),25px);
+	--roundedRadius: 100px;
+	--circleRadius: 100%;
+}
+
+@font-face {
+	font-family: 'Coolkids';
+	font-style: normal;
+	font-weight: 400 496;
+	font-display: auto;
+	src: url(/wp-content/plugins/cool-kids-network/assets/public/font/baloo2.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* normalize */
+
+div[class^="coolkids"] h2,
+div[class^="coolkids"] p,
+div[class^="coolkids"] figure,
+div[class^="coolkids"] ul {
+	margin-top: 0;
+	margin-bottom: 0
+}
+
+div[class^="coolkids"] button:focus,
+div[class^="coolkids"] input[type='email' i]:focus {
+	outline: 0;
+	box-shadow: none;
+}
+
+div[class^="coolkids"] img {
+	width: 100%;
+	height: auto;
+	vertical-align: middle
+}
+
+div[class^="coolkids"] a, div[class^="coolkids"] button {
+	cursor: pointer
+}
+
+div[class^="coolkids"] ::-webkit-scrollbar {
+	height: 0px;
+	width: 0
+}
+
+/* coolkids specific */
+
+div[class^="coolkids"] {
+	font-family: 'Coolkids';
+	font-size: var(--baseFontSize);
+	font-weight: normal;
+	line-height: 1.55;
+	text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+}
+
+.with-padding,
+div[class*="coolkids"].with-padding,
+form[class*="coolkids"].with-padding {
+	padding: calc(1.5em + 1vw);
+	padding: calc(1.5em + 1vw) calc(.75em + 1.85vw);
+}
+
+div[class*="coolkids"] h2 {
+	font-size: var(--largeFontSize);
+	line-height: 1.35
+}
+
+h2 .larger {
+	font-size: 145%
+}
+
+div[class*="coolkids"] ul {
+	padding-inline-start: 1em
+}
+
+.ckn-button-padding {
+	padding: 6px 24px
+}
+
+div[class^="coolkids"] a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: .15em;
+	text-decoration-thickness: .065em;
+	transition: all .375s cubic-bezier(.16,.68,.43,.99)
+}
+
+div[class^="coolkids"] a:hover {
+	text-decoration: none
+}
+
+
+a.ckn-button {
+	font-size: 97%
+}
+
+.ckn-button.with-bg-img-on-hover {
+	background-image: linear-gradient(45deg, black, black);
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-size: 0% 100%;
+	transition: background-size .25s, color .2s;
+}
+
+.ckn-button.with-bg-img-on-hover:hover {
+	color: white;
+	background-size: 100% 100%;
+	border-color: #333;
+}
+
+button.ckn-button {
+    background-color: transparent;
+    font-weight: 500;
+    font-family: inherit;
+    line-height: 1.4;
+}
+
+button.ckn-button.with-bg-color,
+a.ckn-button.with-bg-color {
+	background-color: black;
+	color: white;
+	text-decoration: none
+}
+
+button.ckn-button.with-bg-color:hover,
+a.ckn-button.with-bg-color:hover {
+	background-color: whitesmoke;
+	color: initial;
+}
+
+.has-rm-bg-colors {
+	background-image: linear-gradient(135deg, #ffc107, #ff4081 10%, #9c27b0 40%, #9c27b0 62%, #e91ea4 91%, #ff9800);
+	color: white
+}
+
+.loading-animation svg {
+	width: 80px;
+    height: 60px;
+	margin-top: -18px;
+}
+
+/* utils */
+
+.is-relative { position: relative }
+
+.is-grid { display:grid} 
+.has-2-column-grid { grid-template-columns:repeat(2, 1fr) }
+.grid-span-full { grid-column: 1 / -1 }
+
+.is-flex { display:flex }
+.is-flex-wrap { flex-wrap:wrap }
+.is-flex-column { flex-direction:column }
+
+.is-align-center {align-items:center}
+.is-align-content-center {align-items:center}
+.is-align-self-center {align-self:center}
+.is-justify-center {justify-content:center}
+.is-justify-between {justify-content:space-between}
+.is-justify-evenly { justify-content: space-evenly }
+.is-justify-around { justify-content: space-around }
+.is-justify-end { justify-content: flex-end }
+
+.has-rounded-radius {
+	border-radius: var(--roundedRadius)
+}
+
+.has-square-slight-rounded-radius {
+	border-radius: var(--squareSlightRoundedRadius)
+}
+
+.has-square-rounded-radius {
+	border-radius: var(--squareRoundedRadius)
+}
+
+.has-circle-radius {
+	border-radius: var(--circleRadius)
+}
+
+.has-very-large-global-gap {
+	gap: calc(18px + 1.25vw);
+	gap: calc(16.5px + 1.55vw);
+}
+
+.has-large-global-gap {
+	gap: calc(18px + .5vw);
+}
+
+.has-global-gap {
+	gap: calc(8px + .5vw);
+}
+
+.has-small-global-gap {
+	gap: calc(4px + .25vw);
+}
+
+.has-very-small-global-gap {
+	gap: calc(2px + .15vw);
+}
+
+div[class^="coolkids" ] .m-0-auto,
+.m-0-auto { margin: 0 auto }
+.m-auto-0 { margin: auto 0 }
+.m-t-auto { margin-top: auto }
+.m-l-auto { margin-left: auto }
+
+.has-large-margin-top {
+    margin-top: calc(1.75em + 1.5vw);
+}
+
+div[class^="coolkids" ].has-margin-top,
+div[class^="coolkids" ] .has-margin-top {
+    margin-top: calc(1em + 1vw);
+}
+
+div[class^="coolkids" ] .has-small-margin-top {
+    margin-top: calc(.25em + .25vw);
+}
+
+div[class^="coolkids" ] .has-very-small-margin-top {
+    margin-top: calc(.15em + .15vw);
+}
+
+.text-is-bold {
+	font-weight: bold
+}
+
+.text-is-small {
+	font-size: var(--smallFontSize)
+}
+
+div[class^="coolkids"].text-has-subpixel-antialiased,
+div[class^="coolkids"].text-has-subpixel-antialiased {
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+.text-align-center { text-align: center }
+.text-align-right { text-align: right }
+
+.overflow-is-hidden { overflow: hidden }
+
+.width-is-fit-content { width: fit-content }
+
+
+@media (min-width: 768px) {
+	
+	.has-2-column-grid-desktop {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	
+	div[class*="coolkids"] {
+		width: 960px;
+	    max-width: 88.6vw;
+	}
+
+	div[class*="coolkids"].top {
+		min-height: 448px
+	}
+
+	.left.with-small-padding-on-desktop {
+		padding: .65em 0;
+	}
+
+	.right.with-welcome-img {
+		max-width: 84%;
+	}
+
+	div[class^="coolkids" ] .m-t-auto-desktop { margin-top: auto }
+	
+}
+
+
+@media (max-width: 767.9px) {
+	
+	.order-2-on-mobile {
+		order: 2
+	}
+
+	.left.order-2-on-mobile {
+		margin-top: .5em;
+	}
+}
