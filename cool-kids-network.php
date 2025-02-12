@@ -21,3 +21,10 @@ define( 'CKN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CKN_URL', plugin_dir_url( __FILE__ ) );
 
 require_once dirname(__FILE__) . '/vendor/autoload.php';
+
+CoolKidsNetwork\Enqueue::init();
+CoolKidsNetwork\Shortcodes::init();
+CoolKidsNetwork\UserManager::init();
+CoolKidsNetwork\RoleManager::init();
+CoolKidsNetwork\API::init();
+CoolKidsNetwork\Ajax::init();
