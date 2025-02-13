@@ -239,18 +239,18 @@ class Utils {
 	 */
 	public static function generate_user_card_html( $user_obj, $current_user_role = null ) {
 		$user_role    = $user_obj->roles[0] ?? 'cool_kid';
-	    $user_country = get_user_meta( $user_obj->ID, 'country', true ) ?: esc_html__( 'Unknown', 'ckn' );
-	    $image_url    = esc_url( self::get_role_image( $user_role ) );
-	    $role_class   = esc_attr( self::get_role_class( $user_role ) );
-	    $user_name    = esc_html( "{$user_obj->first_name} {$user_obj->last_name}" );
-	    $user_email   = esc_html( $user_obj->user_email );
-	
-	    $email_block = ( 'coolest_kid' === $current_user_role )
-	        ? sprintf( '<p class="email">%s</p>', esc_html( $user_email ) )
-	        : '';
-	
-	    return sprintf(
-	        '<div class="user-card with-padding is-grid has-global-gap has-square-slight-rounded-radius text-align-center">
+		$user_country = get_user_meta( $user_obj->ID, 'country', true ) ? get_user_meta( $user_obj->ID, 'country', true ) : esc_html__( 'Unknown', 'ckn' );
+		$image_url    = esc_url( self::get_role_image( $user_role ) );
+		$role_class   = esc_attr( self::get_role_class( $user_role ) );
+		$user_name    = esc_html( "{$user_obj->first_name} {$user_obj->last_name}" );
+		$user_email   = esc_html( $user_obj->user_email );
+
+		$email_block = ( 'coolest_kid' === $current_user_role )
+			? sprintf( '<p class="email">%s</p>', esc_html( $user_email ) )
+			: '';
+
+		return sprintf(
+			'<div class="user-card with-padding is-grid has-global-gap has-square-slight-rounded-radius text-align-center">
 	            <figure class="avatar m-0-auto">
 	                <img loading="lazy" src="%s" width="110" height="110" alt="%s" class="has-circle-radius">
 	                <p class="role is-relative text-align-center text-is-bold width-is-fit-content m-0-auto has-rounded-radius %s">
@@ -263,16 +263,16 @@ class Utils {
 	                %s
 	            </div>
 	        </div>',
-	        $image_url,
-	        esc_attr__( 'User Image', 'ckn' ),
-	        $role_class,
-	        esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) ),
-	        $user_name,
-	        $user_country,
-	        $email_block
-	    );
+			$image_url,
+			esc_attr__( 'User Image', 'ckn' ),
+			$role_class,
+			esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) ),
+			$user_name,
+			$user_country,
+			$email_block
+		);
 	}
-	
+
 	/**
 	 * Logs error messages to the WordPress debug log if WP_DEBUG_LOG is enabled.
 	 *

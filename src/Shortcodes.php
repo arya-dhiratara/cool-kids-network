@@ -67,6 +67,7 @@ class Shortcodes {
 	public static function render_login_form() {
 		if ( is_user_logged_in() ) {
 			return '<p>' . sprintf(
+				/* translators: %s is a logout link. */
 				esc_html__( 'You are already logged in. %s', 'ckn' ),
 				'<a href="' . esc_url( wp_logout_url( home_url() ) ) . '">' . esc_html__( 'Logout', 'ckn' ) . '</a>'
 			) . '</p>';
