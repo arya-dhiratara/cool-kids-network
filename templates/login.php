@@ -24,12 +24,13 @@ if ( $login_failed ) {
 <div class="coolkids-login top m-0-auto is-grid has-2-column-grid-desktop has-very-large-global-gap has-rm-bg-colors with-padding has-square-rounded-radius">
 	<div class="left is-flex is-flex-column has-small-global-gap order-2-on-mobile with-small-padding-on-desktop">
 		<h2 class="text-is-bold">
-			<?php 
+			<?php
 				printf(
+					/* translators: %s is site title */
 					esc_html__( 'Welcome to the %s', 'ckn' ),
 					'<span class="larger is-flex">' . esc_html__( 'Cool Kids Network', 'ckn' ) . '!</span>'
-				); 
-			?>
+				);
+				?>
 		</h2>
 
 		<?php if ( $login_failed ) : ?>

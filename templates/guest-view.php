@@ -12,12 +12,13 @@
 <div class="coolkids-home top m-0-auto is-grid has-2-column-grid-desktop has-very-large-global-gap has-rm-bg-colors with-padding has-square-rounded-radius">
 	<div class="left is-flex is-flex-column has-small-global-gap order-2-on-mobile with-small-padding-on-desktop">
 		<h2 class="text-is-bold">
-			<?php 
+			<?php
 				printf(
+					/* translators: %s is site title */
 					esc_html__( 'Welcome to the %s', 'ckn' ),
 					'<span class="larger is-flex">' . esc_html__( 'Cool Kids Network', 'ckn' ) . '!</span>'
-				); 
-			?>
+				);
+				?>
 		</h2>
 		<p><?php esc_html_e( 'Join the coolest network of kids from around the world by signing up now!', 'ckn' ); ?></p>
 		<div class="buttons is-flex is-flex-wrap has-very-small-global-gap has-small-margin-top m-t-auto-desktop">

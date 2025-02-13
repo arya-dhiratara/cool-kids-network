@@ -29,25 +29,27 @@ if ( $signup_failed ) {
 <div class="coolkids-login top m-0-auto is-grid has-2-column-grid-desktop has-very-large-global-gap has-rm-bg-colors with-padding has-square-rounded-radius">
 	<div class="left is-flex is-flex-column has-small-global-gap order-2-on-mobile with-small-padding-on-desktop">
 		<h2 class="text-is-bold">
-			<?php 
+			<?php
 				printf(
+					/* translators: %s is site title */
 					esc_html__( 'Welcome to the %s', 'ckn' ),
 					'<span class="larger is-flex">' . esc_html__( 'Cool Kids Network', 'ckn' ) . '!</span>'
-				); 
-			?>
+				);
+				?>
 		</h2>
 
 		<?php if ( $signup_success ) : ?>
 			<p class="success-message">
-				<?php 
+				<?php
 					echo wp_kses(
 						sprintf(
-							esc_html__( 'Yay! You\'re officially signed up! %sLog in here%s to meet other cool kids!', 'ckn' ),
+							/* translators: %1$s and %2$s wrap the "Log in here" text with a link. */
+							esc_html__( 'Yay! You\'re officially signed up! %1$sLog in here%2$s to meet other cool kids!', 'ckn' ),
 							'<a href="' . esc_url( home_url( '/login/' ) ) . '">',
 							'</a>'
 						),
-						[ 'a' => [ 'href' => [] ] ]
-					); 
+						array( 'a' => array( 'href' => array() ) )
+					);
 				?>
 			</p>
 		<?php elseif ( $signup_failed ) : ?>

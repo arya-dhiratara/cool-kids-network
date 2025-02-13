@@ -27,7 +27,7 @@ $ckn_current_user = $user_data['user'];
 $can_view_users = in_array( $ckn_role, array( 'cooler_kid', 'coolest_kid' ), true );
 
 // Fetch users (excluding current user).
-$args  = array(
+$args = array(
 	'number'   => 13,
 	'orderby'  => 'registered',
 	'order'    => 'DESC',
@@ -37,8 +37,8 @@ $args  = array(
 
 $users = get_users( $args );
 
-$current_user = wp_get_current_user();
-$user_role    = $current_user->roles[0] ?? '';
+$ckn_users = wp_get_current_user();
+$user_role = $ckn_users->roles[0] ?? '';
 
 // Check if there are more than 12 users.
 $has_more_users = count( $users ) > 12;
