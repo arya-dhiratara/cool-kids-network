@@ -42,7 +42,12 @@ class Enqueue {
 			// Version with daily cache bust for dev.
 			CKN_VER . '-' . gmdate( 'Ymd' )
 		);
-		wp_enqueue_style( CKN_SLUG . '-style' );
+
+		if ( ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_home' ) ) ||
+			( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_login' ) ) ||
+			( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_signup' ) ) ) {
+			wp_enqueue_style( CKN_SLUG . '-style' );
+		}
 
 		if ( ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_login' ) ) ||
 			( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_signup' ) ) ) {
@@ -153,7 +158,9 @@ class Enqueue {
 	 * @return void
 	 */
 	public static function load_scripts() {
-		wp_enqueue_script(
+		global $post;
+
+		wp_register_script(
 			CKN_SLUG . '-ajax-users',
 			CKN_URL . 'assets/public/js/load-more-users.js',
 			array(),
@@ -165,13 +172,16 @@ class Enqueue {
 			)
 		);
 
-		wp_localize_script(
-			CKN_SLUG . '-ajax-users',
-			'coolKidsAjax',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( 'load_more_users' ),
-			)
-		);
+		if ( ( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'coolkids_home' ) ) ) {
+			wp_enqueue_script( CKN_SLUG . '-ajax-users' );
+			wp_localize_script(
+				CKN_SLUG . '-ajax-users',
+				'coolKidsAjax',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( 'load_more_users' ),
+				)
+			);
+		}
 	}
 }
