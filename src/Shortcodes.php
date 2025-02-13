@@ -24,6 +24,8 @@ class Shortcodes {
 	 */
 	public static function init() {
 		add_shortcode( 'coolkids_home', array( __CLASS__, 'render_home' ) );
+		add_shortcode( 'coolkids_login', array( __CLASS__, 'render_login_form' ) );
+		add_shortcode( 'coolkids_signup', array( __CLASS__, 'render_signup_form' ) );
 	}
 
 	/**
@@ -55,5 +57,30 @@ class Shortcodes {
 		return $user_data
 			? self::get_template( 'user-view', $user_data )
 			: self::get_template( 'guest-view' );
+	}
+
+	/**
+	 * Render the login form.
+	 *
+	 * @return string Rendered login template or a message if already logged in.
+	 */
+	public static function render_login_form() {
+		if ( is_user_logged_in() ) {
+			return '<p>' . sprintf(
+				esc_html__( 'You are already logged in. %s', 'ckn' ),
+				'<a href="' . esc_url( wp_logout_url( home_url() ) ) . '">' . esc_html__( 'Logout', 'ckn' ) . '</a>'
+			) . '</p>';
+		}
+
+		return self::get_template( 'login' );
+	}
+
+	/**
+	 * Render the signup form.
+	 *
+	 * @return string Rendered signup template.
+	 */
+	public static function render_signup_form() {
+		return self::get_template( 'signup' );
 	}
 }

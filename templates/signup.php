@@ -28,21 +28,45 @@ if ( $signup_failed ) {
 
 <div class="coolkids-login top m-0-auto is-grid has-2-column-grid-desktop has-very-large-global-gap has-rm-bg-colors with-padding has-square-rounded-radius">
 	<div class="left is-flex is-flex-column has-small-global-gap order-2-on-mobile with-small-padding-on-desktop">
-		<h2 class="text-is-bold">Welcome to the <span class="larger is-flex">Cool Kids Network!</span></h2>
+		<h2 class="text-is-bold">
+			<?php 
+				printf(
+					esc_html__( 'Welcome to the %s', 'ckn' ),
+					'<span class="larger is-flex">' . esc_html__( 'Cool Kids Network', 'ckn' ) . '!</span>'
+				); 
+			?>
+		</h2>
 
 		<?php if ( $signup_success ) : ?>
-			<p class="success-message">Yay! You're officially signed up! <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>">Log in here</a> to meet other cool kids!</p>
+			<p class="success-message">
+				<?php 
+					echo wp_kses(
+						sprintf(
+							esc_html__( 'Yay! You\'re officially signed up! %sLog in here%s to meet other cool kids!', 'ckn' ),
+							'<a href="' . esc_url( home_url( '/login/' ) ) . '">',
+							'</a>'
+						),
+						[ 'a' => [ 'href' => [] ] ]
+					); 
+				?>
+			</p>
 		<?php elseif ( $signup_failed ) : ?>
 			<p class="failed-message width-is-fit-content has-rounded-radius"><?php echo esc_html( $signup_failed ); ?></p>
-			<?php echo esc_html( Utils::generate_signup_form_html() ); ?>
-		<?php else : ?>
-			<p>Create an account using your email.</p>
-			<?php echo esc_html( Utils::generate_signup_form_html() ); ?>
 		<?php endif; ?>
+
+		<?php echo wp_kses_post( Utils::generate_signup_form_html() ); ?>
 	</div>
+
 	<div class="right m-l-auto with-welcome-img is-flex is-flex-column is-justify-center">
 		<figure class="welcome">
-			<img loading="eager" fetchpriority="high" src="<?php echo esc_url( CKN_URL . 'assets/public/img/cool-kids-network.webp' ); ?>" width="300" height="300" alt="Welcome Image">
+			<img 
+				loading="eager" 
+				fetchpriority="high" 
+				src="<?php echo esc_url( CKN_URL . 'assets/public/img/cool-kids-network.webp' ); ?>" 
+				width="300" 
+				height="300" 
+				alt="<?php echo esc_attr__( 'Welcome Image', 'ckn' ); ?>"
+			>
 		</figure>
 	</div>
 </div>

@@ -27,11 +27,11 @@ class Utils {
 		?>
 		<form class="coolkids-form is-flex is-flex-column has-small-global-gap has-small-margin-top m-t-auto-desktop" method="post" action="">
 			<?php wp_nonce_field( 'coolkids_signup', 'coolkids_nonce' ); ?>
-			<label for="email">Email Address:</label>
+			<label for="email"><?php esc_html_e( 'Email Address:', 'ckn' ); ?></label>
 			<input type="email" name="email" class="has-square-rounded-radius" required>
-			<button type="submit" name="coolkids_signup" class="ckn-button ckn-button-padding has-square-rounded-radius with-bg-color">Confirm</button>
+			<button type="submit" name="coolkids_signup" class="ckn-button ckn-button-padding has-square-rounded-radius with-bg-color"><?php esc_html_e( 'Confirm', 'ckn' ); ?></button>
 		</form>
-		<p class="text-is-small has-very-small-margin-top">Have an account? Log in <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>">here</a>!</p>
+		<p class="text-is-small has-very-small-margin-top"><?php esc_html_e( 'Have an account? Log in', 'ckn' ); ?> <a href="<?php echo esc_url( home_url( '/login/' ) ); ?>"><?php esc_html_e( 'here', 'ckn' ); ?></a>!</p>
 		<?php
 	}
 
@@ -44,11 +44,11 @@ class Utils {
 		?>
 		<form class="coolkids-form is-flex is-flex-column has-small-global-gap has-small-margin-top m-t-auto-desktop" method="post" action="">
 			<?php wp_nonce_field( 'coolkids_login', 'coolkids_nonce' ); ?>
-			<label for="email">Email Address:</label>
+			<label for="email"><?php esc_html_e( 'Email Address:', 'ckn' ); ?></label>
 			<input type="email" name="email" class="has-square-rounded-radius" required>
-			<button type="submit" name="coolkids_login" class="ckn-button ckn-button-padding has-square-rounded-radius with-bg-color">Login</button>
+			<button type="submit" name="coolkids_login" class="ckn-button ckn-button-padding has-square-rounded-radius with-bg-color"><?php esc_html_e( 'Login', 'ckn' ); ?></button>
 		</form>
-		<p class="text-is-small has-very-small-margin-top">Don't have an account yet? Signup <a href="<?php echo esc_url( home_url( '/signup/' ) ); ?>">here</a>!</p>
+		<p class="text-is-small has-very-small-margin-top"><?php esc_html_e( "Don't have an account yet? Signup", 'ckn' ); ?> <a href="<?php echo esc_url( home_url( '/signup/' ) ); ?>"><?php esc_html_e( 'here', 'ckn' ); ?></a>!</p>
 		<?php
 	}
 
@@ -96,11 +96,11 @@ class Utils {
 		$email = sanitize_email( $email );
 
 		if ( ! is_email( $email ) ) {
-			return new \WP_Error( 'invalid_email', 'Oops! Invalid email. Please try again.' );
+			return new \WP_Error( 'invalid_email', __( 'Oops! Invalid email. Please try again.', 'ckn' ) );
 		}
 
 		if ( email_exists( $email ) ) {
-			return new \WP_Error( 'email_exists', 'This email is already registered.' );
+			return new \WP_Error( 'email_exists', __( 'This email is already registered.', 'ckn' ) );
 		}
 
 		return self::create_user( $email, 'cool_kid' );
@@ -163,8 +163,7 @@ class Utils {
 			exit();
 		}
 
-		set_transient( 'coolkids_login_failed', 'Oops! Email not registered. Please try again.', 30 );
-
+		set_transient( 'coolkids_login_failed', __( 'Oops! Email not registered. Please try again.', 'ckn' ), 30 );
 		wp_safe_redirect( home_url( '/login/' ) );
 		exit();
 	}
@@ -240,30 +239,40 @@ class Utils {
 	 */
 	public static function generate_user_card_html( $user_obj, $current_user_role = null ) {
 		$user_role    = $user_obj->roles[0] ?? 'cool_kid';
-		$user_country = get_user_meta( $user_obj->ID, 'country', true ) ? get_user_meta( $user_obj->ID, 'country', true ) : 'Unknown';
-		$image_url    = esc_url( self::get_role_image( $user_role ) );
-		$role_class   = esc_attr( self::get_role_class( $user_role ) );
-		$user_name    = esc_html( "{$user_obj->first_name} {$user_obj->last_name}" );
-		$user_email   = esc_html( $user_obj->user_email );
-
-		$email_block = ( 'coolest_kid' === $current_user_role )
-			? '<p class="email">' . esc_html( $user_email ) . '</p>'
-			: '';
-
-		return '<div class="user-card with-padding is-grid has-global-gap has-square-slight-rounded-radius text-align-center">
-	        <figure class="avatar m-0-auto">
-	            <img loading="lazy" src="' . $image_url . '" width="110" height="110" alt="User Image" class="has-circle-radius">
-	            <p class="role is-relative text-align-center text-is-bold width-is-fit-content m-0-auto has-rounded-radius ' . $role_class . '">
-	                ' . esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) ) . '!
-	            </p>
-	        </figure>
-	        <div class="user-info is-grid is-justify-center">
-	            <p class="name text-is-bold">' . esc_html( $user_name ) . '</p>
-	            <p class="country">' . esc_html( $user_country ) . '</p>
-	            ' . $email_block . '
-	        </div>
-	    </div>';
+	    $user_country = get_user_meta( $user_obj->ID, 'country', true ) ?: esc_html__( 'Unknown', 'ckn' );
+	    $image_url    = esc_url( self::get_role_image( $user_role ) );
+	    $role_class   = esc_attr( self::get_role_class( $user_role ) );
+	    $user_name    = esc_html( "{$user_obj->first_name} {$user_obj->last_name}" );
+	    $user_email   = esc_html( $user_obj->user_email );
+	
+	    $email_block = ( 'coolest_kid' === $current_user_role )
+	        ? sprintf( '<p class="email">%s</p>', esc_html( $user_email ) )
+	        : '';
+	
+	    return sprintf(
+	        '<div class="user-card with-padding is-grid has-global-gap has-square-slight-rounded-radius text-align-center">
+	            <figure class="avatar m-0-auto">
+	                <img loading="lazy" src="%s" width="110" height="110" alt="%s" class="has-circle-radius">
+	                <p class="role is-relative text-align-center text-is-bold width-is-fit-content m-0-auto has-rounded-radius %s">
+	                    %s!
+	                </p>
+	            </figure>
+	            <div class="user-info is-grid is-justify-center">
+	                <p class="name text-is-bold">%s</p>
+	                <p class="country">%s</p>
+	                %s
+	            </div>
+	        </div>',
+	        $image_url,
+	        esc_attr__( 'User Image', 'ckn' ),
+	        $role_class,
+	        esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) ),
+	        $user_name,
+	        $user_country,
+	        $email_block
+	    );
 	}
+	
 	/**
 	 * Logs error messages to the WordPress debug log if WP_DEBUG_LOG is enabled.
 	 *
