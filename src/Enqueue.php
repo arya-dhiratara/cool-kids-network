@@ -16,11 +16,6 @@ defined( 'ABSPATH' ) || exit;
  *
  * Manages the loading of styles and scripts.
  */
-/**
- * Class Enqueue
- *
- * Manages the loading of styles and scripts.
- */
 class Enqueue {
 	/**
 	 * Initialize script and style loading.
