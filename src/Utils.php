@@ -245,6 +245,15 @@ class Utils {
 		$user_name    = esc_html( "{$user_obj->first_name} {$user_obj->last_name}" );
 		$user_email   = esc_html( $user_obj->user_email );
 
+		// Role block: Only visible to 'coolest_kid'.
+		$role_block = ( 'coolest_kid' === $current_user_role )
+			? sprintf(
+				'<p class="role is-relative text-align-center text-is-bold width-is-fit-content m-0-auto has-rounded-radius %s">%s!</p>',
+				esc_attr( $role_class ),
+				esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) )
+			)
+			: '';
+
 		$email_block = ( 'coolest_kid' === $current_user_role )
 			? sprintf( '<p class="email">%s</p>', esc_html( $user_email ) )
 			: '';
@@ -253,9 +262,7 @@ class Utils {
 			'<div class="user-card with-padding is-grid has-global-gap has-square-slight-rounded-radius text-align-center">
 	            <figure class="avatar m-0-auto">
 	                <img loading="lazy" src="%s" width="110" height="110" alt="%s" class="has-circle-radius">
-	                <p class="role is-relative text-align-center text-is-bold width-is-fit-content m-0-auto has-rounded-radius %s">
-	                    %s!
-	                </p>
+	                %s
 	            </figure>
 	            <div class="user-info is-grid is-justify-center">
 	                <p class="name text-is-bold">%s</p>
@@ -265,11 +272,10 @@ class Utils {
 	        </div>',
 			$image_url,
 			esc_attr__( 'User Image', 'ckn' ),
-			$role_class,
-			esc_html( ucwords( str_replace( '_', ' ', $user_role ) ) ),
+			$role_block, // Role only shown to 'coolest_kid'.
 			$user_name,
 			$user_country,
-			$email_block
+			$email_block // Email only shown to 'coolest_kid'.
 		);
 	}
 
