@@ -71,6 +71,8 @@ cool-kids-network/
 ├── composer.json
 ├── composer.lock
 ├── cool-kids-network.php  // Main plugin file
+├── Explanation.md 
+├── README.md 
 ├── index.php
 ├── phpcs.xml
 └── phpunit.xml
