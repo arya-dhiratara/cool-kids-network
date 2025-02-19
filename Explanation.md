@@ -66,6 +66,10 @@ cool-kids-network/
 │   ├── index.php
 │   ├── APITest.php
 │   └── bootstrap.php
+├── vendor/
+│   ├── index.php
+│   ├── autoload.php
+│   │  └── composer/
 ├── .gitignore
 ├── LICENSE
 ├── composer.json
