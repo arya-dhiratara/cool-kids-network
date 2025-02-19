@@ -4,8 +4,3 @@ Thumbs.db
 
 # Ignore PHPCS cache
 .phpcs.cache
-
-# Ignore Composer dependencies except autoload.php (can be installed via `composer install`)
-/vendor/*
-!/vendor/autoload.php
-!/vendor/composer/
